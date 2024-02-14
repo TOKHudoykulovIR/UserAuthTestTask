@@ -10,5 +10,6 @@ class CustomUser(AbstractUser):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey("CustomUser", on_delete=models.CASCADE, related_name="comments")
+    to = models.ForeignKey("CustomUser", on_delete=models.CASCADE, related_name="received_comments")
+    author = models.ForeignKey("CustomUser", on_delete=models.CASCADE, related_name="left_comments")
     text = models.CharField(max_length=100)

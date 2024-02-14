@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-# from .forms import AdminPanelUserRegistrationForm, AdminPanelUserChangeForm
+from .models import Comment
 
 UserModel = get_user_model()
 
@@ -9,8 +9,6 @@ UserModel = get_user_model()
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
-    # add_form = AdminPanelUserRegistrationForm
-    # form = AdminPanelUserChangeForm
     model = UserModel
 
     fieldsets = (
@@ -27,3 +25,8 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(UserModel, CustomUserAdmin)
 
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'to', 'text')
+    search_fields = ('id', 'author', 'to', 'text', )
